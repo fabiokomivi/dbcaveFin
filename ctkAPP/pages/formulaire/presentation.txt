@@ -1,0 +1,15 @@
+1. SQLAlchemy
+Présentation : SQLAlchemy est un ORM (Object Relational Mapper) pour Python qui permet de manipuler des bases de données relationnelles en utilisant des objets Python plutôt que du SQL brut. Il permet de créer, lire, mettre à jour, et supprimer des enregistrements dans une base de données de manière fluide et abstraite.
+Utilité dans le projet : SQLAlchemy simplifie la gestion de la base de données en facilitant les requêtes et les interactions avec PostgreSQL via des classes Python, tout en maintenant la flexibilité d'écrire des requêtes SQL plus complexes si nécessaire.
+2. psycopg2
+Présentation : psycopg2 est une bibliothèque qui permet à Python d'interagir avec PostgreSQL. C'est le connecteur le plus populaire pour cette base de données, offrant une interface fiable pour exécuter des requêtes SQL.
+Utilité dans le projet : psycopg2 est utilisé pour établir des connexions directes à la base de données PostgreSQL, exécutant des requêtes SQL plus fines lorsque nécessaire et gérant la communication entre ton application et la base de données.
+3. WeasyPrint
+Présentation : WeasyPrint est une bibliothèque Python permettant de générer des documents PDF à partir de fichiers HTML et CSS. Il est souvent utilisé pour créer des rapports ou des factures avec un rendu soigné.
+Utilité dans le projet : WeasyPrint est utilisé pour générer des factures ou des rapports en PDF dans ton application de gestion de cave, offrant une solution esthétique et pratique pour exporter les données sous forme de documents imprimables.
+4. Matplotlib
+Présentation : Matplotlib est une bibliothèque de visualisation pour Python. Elle permet de créer des graphiques, diagrammes, et figures statiques, animées ou interactives.
+Utilité dans le projet : Matplotlib est utilisé pour représenter visuellement des données, comme les stocks de boissons, à travers des diagrammes circulaires, graphiques à barres, etc., offrant une vue claire des informations clés pour les utilisateurs.
+5. PostgreSQL
+Présentation : PostgreSQL est un système de gestion de base de données relationnelle open-source puissant. Il est reconnu pour sa robustesse, sa sécurité, et son support des standards SQL avancés, ainsi que pour sa capacité à gérer de gros volumes de données et des opérations complexes.
+Utilité dans le projet : PostgreSQL est la base de données utilisée pour stocker toutes les informations de ton application, comme les boissons, les catégories, les clients, les commandes, et le stock. C'est un choix idéal pour les applications nécessitant des performances et une fiabilité accrues.

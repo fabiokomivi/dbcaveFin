@@ -1,0 +1,5 @@
+creation de la boisson: (bb 5000 soda) le 24/10/2024 21:32 par (admin admin 06661918)
+modification de la boisson: (red label 10000 liqueur) -> (red label 10100 liqueur) le 24/10/2024 21:43 par (admin admin 06661918)
+creation de la boisson: (coca 500 soda) le 25/10/2024 16:28 par (admin admin 12123232)
+creation de la boisson: (jack daniel 10500 liqueur) le 25/10/2024 16:29 par (admin admin 12123232)
+creation de la boisson: (don simon 1500 vin) le 25/10/2024 16:29 par (admin admin 12123232)

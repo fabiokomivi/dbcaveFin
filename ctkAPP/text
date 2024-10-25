@@ -1,0 +1,263 @@
+Voici une explication ligne par ligne du code en français :
+
+Importation des modules nécessaires
+python
+Copier le code
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+create_engine : Crée un moteur de base de données pour gérer les connexions.
+Column : Permet de définir une colonne dans une table de la base de données.
+Integer : Type de donnée entier pour les colonnes.
+String : Type de donnée texte (chaîne de caractères) pour les colonnes.
+ForeignKey : Utilisé pour définir une relation entre deux tables via une clé étrangère.
+python
+Copier le code
+from sqlalchemy.ext.declarative import declarative_base
+declarative_base : Crée une classe de base pour définir des modèles (entités) de base de données. Tous les modèles héritent de cette classe.
+python
+Copier le code
+from sqlalchemy.orm import relationship, sessionmaker
+relationship : Permet de définir des relations entre différents modèles (tables) pour faciliter les jointures et l'accès aux données associées.
+sessionmaker : Crée des sessions pour interagir avec la base de données.
+Déclaration de la base
+python
+Copier le code
+Base = declarative_base()
+Définit une base commune à partir de laquelle toutes les classes/modèles vont hériter. C'est la fondation pour définir des tables.
+Modèle Chef
+python
+Copier le code
+class Chef(Base):
+    __tablename__ = 'chefs'
+class Chef(Base) : Crée un modèle de base de données pour représenter un chef. Ce modèle hérite de Base.
+__tablename__ = 'chefs' : Définit le nom de la table dans la base de données.
+python
+Copier le code
+    id = Column(Integer, primary_key=True)
+Crée une colonne id de type entier qui est la clé primaire de la table chefs. Elle identifie de manière unique chaque enregistrement.
+python
+Copier le code
+    nom = Column(String, nullable=False)
+Crée une colonne nom de type chaîne de caractères (texte), obligatoire (nullable=False) pour stocker le nom du chef.
+python
+Copier le code
+    employes = relationship("Employe", back_populates="chef")
+Crée une relation entre le modèle Chef et le modèle Employe. Un chef peut avoir plusieurs employés associés.
+Modèle Employé
+python
+Copier le code
+class Employe(Base):
+    __tablename__ = 'employes'
+Crée un modèle pour représenter un employé avec le nom de la table employes.
+python
+Copier le code
+    id = Column(Integer, primary_key=True)
+    nom = Column(String, nullable=False)
+Colonne id : Identifiant unique de l'employé.
+Colonne nom : Nom de l'employé, obligatoire.
+python
+Copier le code
+    chef_id = Column(Integer, ForeignKey('chefs.id'))
+Crée une clé étrangère pour lier chaque employé à un chef spécifique via la colonne chef_id. Cela fait référence à l'identifiant (id) de la table chefs.
+python
+Copier le code
+    chef = relationship("Chef", back_populates="employes")
+Crée une relation inversée, c'est-à-dire que chaque employé est associé à un chef. Le back_populates synchronise cette relation avec le côté Chef.
+python
+Copier le code
+    commandes = relationship("Commande", back_populates="employe")
+Crée une relation entre l'employé et ses commandes.
+Modèle Client
+python
+Copier le code
+class Client(Base):
+    __tablename__ = 'clients'
+Crée le modèle pour représenter un client avec la table clients.
+python
+Copier le code
+    id = Column(Integer, primary_key=True)
+    nom = Column(String, nullable=False)
+Colonne id : Identifiant unique du client.
+Colonne nom : Nom du client, obligatoire.
+python
+Copier le code
+    commandes = relationship("Commande", back_populates="client")
+Crée une relation entre le client et ses commandes. Un client peut passer plusieurs commandes.
+Modèle Catégorie de Boissons
+python
+Copier le code
+class CategorieBoisson(Base):
+    __tablename__ = 'categories_boissons'
+Définit le modèle pour la table categories_boissons, qui stocke les catégories de boissons.
+python
+Copier le code
+    id = Column(Integer, primary_key=True)
+    nom = Column(String, nullable=False)
+Colonne id : Identifiant unique de la catégorie de boisson.
+Colonne nom : Nom de la catégorie (obligatoire).
+python
+Copier le code
+    boissons = relationship("Boisson", back_populates="categorie")
+Relation entre une catégorie et les boissons qui en font partie. Une catégorie peut avoir plusieurs boissons.
+Modèle Boisson
+python
+Copier le code
+class Boisson(Base):
+    __tablename__ = 'boissons'
+Modèle pour la table boissons, qui représente les boissons dans la cave.
+python
+Copier le code
+    id = Column(Integer, primary_key=True)
+    nom = Column(String, nullable=False)
+    categorie_id = Column(Integer, ForeignKey('categories_boissons.id'))
+Colonne id : Identifiant unique de la boisson.
+Colonne nom : Nom de la boisson, obligatoire.
+categorie_id : Clé étrangère qui lie la boisson à une catégorie via son identifiant.
+python
+Copier le code
+    categorie = relationship("CategorieBoisson", back_populates="boissons")
+Relation entre une boisson et sa catégorie.
+python
+Copier le code
+    stock = relationship("Stock", uselist=False, back_populates="boisson")
+Relation entre une boisson et son stock, chaque boisson ayant un seul stock.
+Modèle Commande
+python
+Copier le code
+class Commande(Base):
+    __tablename__ = 'commandes'
+Crée la table commandes, qui représente les commandes des clients.
+python
+Copier le code
+    id = Column(Integer, primary_key=True)
+    client_id = Column(Integer, ForeignKey('clients.id'))
+    employe_id = Column(Integer, ForeignKey('employes.id'))
+Colonne id : Identifiant unique de la commande.
+client_id : Clé étrangère qui fait référence à l'identifiant du client qui a passé la commande.
+employe_id : Clé étrangère qui fait référence à l'employé qui a pris la commande.
+python
+Copier le code
+    client = relationship("Client", back_populates="commandes")
+    employe = relationship("Employe", back_populates="commandes")
+Relations inversées entre Client et Commande, et entre Employe et Commande.
+Modèle Stock
+python
+Copier le code
+class Stock(Base):
+    __tablename__ = 'stock'
+Crée le modèle pour la table stock, qui représente le stock des boissons.
+python
+Copier le code
+    id = Column(Integer, primary_key=True)
+    boisson_id = Column(Integer, ForeignKey('boissons.id'))
+    quantite = Column(Integer, nullable=False)
+Colonne boisson_id : Clé étrangère pour lier le stock à une boisson.
+quantite : Quantité de boisson en stock (obligatoire).
+python
+Copier le code
+    boisson = relationship("Boisson", back_populates="stock")
+Relation entre le stock et la boisson correspondante.
+Configuration de la base de données
+python
+Copier le code
+engine = create_engine('sqlite:///gestion_cave.db', echo=True)
+create_engine : Crée un moteur pour une base de données SQLite appelée gestion_cave.db. echo=True affiche les requêtes SQL générées pour aider au débogage.
+Création des tables
+python
+Copier le code
+Base.metadata.create_all(engine)
+Crée toutes les tables dans la base de données en fonction des modèles définis.
+Création d'une session
+python
+Copier le code
+Session = sessionmaker(bind=engine)
+session = Session()
+sessionmaker : Crée une fabrique de sessions pour interagir avec la base de données. Chaque session représente une connexion à la base de données.
+Exemple d'ajout de données
+python
+Copier le code
+def ajouter_donnees():
+    chef1 = Chef(nom="Chef 1")
+    client1 = Client(nom="Client 1")
+    categorie1 = CategorieBoisson(nom="Vin")
+    boisson1 = Boisson(nom="Bordeaux", categorie=categorie1)
+    employe1 = Employe(nom="Employé 1", chef=chef1)
+    stock1 = Stock(boisson=boisson1, quantite=100)
+    commande1 = Commande(client=client1, employe=employe1)
+Cette fonction crée des objets pour chaque modèle : un chef, un client, une catégorie de boisson, une boisson, un employé, un stock, et une commande.
+python
+Copier le code
+    session.add(chef1)
+    session.add(client1)
+    session.add(categorie1)
+    session.add(boisson1)
+    session.add(employe1)
+    session.add(stock1)
+
+
+
+
+
+DO $$ DECLARE
+    r RECORD;
+BEGIN
+    FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+        EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE';
+    END LOOP;
+END $$;
+
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+
+def envoyer_email(expediteur, mot_de_passe, destinataire, sujet, corps):
+    # Créer l'objet du message
+    message = MIMEMultipart()
+    message["From"] = expediteur
+    message["To"] = destinataire
+    message["Subject"] = sujet
+
+    # Ajouter le corps de l'email
+    message.attach(MIMEText(corps, "plain"))
+
+    # Convertir le message en chaîne de texte
+    email_texte = message.as_string()
+
+    # Se connecter au serveur SMTP
+    try:
+        serveur_smtp = smtplib.SMTP("smtp.gmail.com", 587)
+        serveur_smtp.starttls()  # Démarrer la connexion sécurisée TLS
+        serveur_smtp.login(expediteur, mot_de_passe)  # Connexion avec l'adresse email et le mot de passe
+
+        # Envoyer l'email
+        serveur_smtp.sendmail(expediteur, destinataire, email_texte)
+        print("Email envoyé avec succès !")
+
+        # Fermer la connexion
+        serveur_smtp.quit()
+
+    except Exception as e:
+        print(f"Erreur lors de l'envoi de l'email : {e}")
+
+expediteur = "ton_email@gmail.com"
+mot_de_passe = "ton_mot_de_passe"  # Attention à la sécurité de ton mot de passe
+destinataire = "destinataire@example.com"
+sujet = "Objet de l'email"
+corps = "Ceci est le corps de l'email envoyé via Python."
+
+envoyer_email(expediteur, mot_de_passe, destinataire, sujet, corps)
+
+
+from email.mime.base import MIMEBase
+from email import encoders
+
+def ajouter_piece_jointe(message, chemin_fichier):
+    with open(chemin_fichier, "rb") as fichier:
+        piece = MIMEBase("application", "octet-stream")
+        piece.set_payload(fichier.read())
+    encoders.encode_base64(piece)
+    piece.add_header(
+        "Content-Disposition",
+        f"attachment; filename= {chemin_fichier}",
+    )
+    message.attach(piece)

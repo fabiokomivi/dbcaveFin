@@ -1,0 +1,18 @@
+pour l'execution propre de l'application certains bibliothèque sont indispensables. ce sont:
+
+1- customtkinter
+2- sqlalchemy
+3- psycopg2
+4- weasyprint
+5- matplotlib
+6- tkcalendar
+
+pour l'installation des librairies sur window:
+    executez le fichier "dependance.bat" dans le repertoire "dependance"
+
+
+pour l'installation des librairies sur linux:
+    ouvrer un terminale dans le repertoire "dependance" et executez les commandes suivants:
+    
+        chmod +x install_dependencies.sh
+        ./install_dependencies.sh

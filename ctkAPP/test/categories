@@ -1,0 +1,21 @@
+Vin
+Description : Boisson alcoolisée obtenue à partir de la fermentation du raisin. Il existe différents types de vin, comme le vin rouge, le vin blanc et le vin rosé.
+2. Bière
+Description : Boisson alcoolisée brassée à partir de céréales comme l’orge, le houblon, et l’eau. Elle peut être blonde, brune, ou ambrée selon le processus de fabrication.
+3. Spiritueux
+Description : Boissons alcoolisées distillées telles que le whisky, le rhum, la vodka, ou encore le gin. Ces boissons sont généralement plus fortes en alcool.
+4. Cocktail
+Description : Mélange de plusieurs boissons (alcoolisées et non alcoolisées), souvent servi avec des glaçons ou des garnitures comme des fruits. Exemples : Mojito, Margarita, Daiquiri.
+5. Liqueur
+Description : Boisson alcoolisée aromatisée, souvent sucrée, contenant des fruits, des herbes ou des épices. Exemples : Grand Marnier, Baileys, Cointreau.
+6. Eau
+Description : Boisson non alcoolisée indispensable à l'hydratation. Elle peut être plate ou gazeuse, et certaines eaux sont naturellement minérales.
+7. Jus de Fruits
+Description : Boisson non alcoolisée obtenue à partir de fruits pressés. Exemples : jus d’orange, jus de pomme, jus de raisin.
+8. Soda
+Description : Boisson gazeuse sucrée, souvent aromatisée. Exemples : Coca-Cola, Pepsi, Fanta, Sprite.
+9. Thé et Café
+Description : Boissons chaudes non alcoolisées. Le thé est infusé à partir de feuilles de thé, et le café est préparé à partir de grains de café torréfiés.
+10. Énergisants
+Description : Boissons non alcoolisées contenant des stimulants comme la caféine, le taurine, et souvent du sucre. Exemples : Red Bull, Monster.
+Ces catégories peuvent t'aider à structurer et organiser les différentes boissons dans ton projet de gestion de cave, en permettant à chaque boisson d'appartenir à une catégorie avec une description.
